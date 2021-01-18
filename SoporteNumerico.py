@@ -27,23 +27,20 @@ def es_primo(numero):
 
     if numero == 1 or numero == 0:
         primo = False
-        return primo
     elif numero == 2:
-        return primo
-
+        primo = True
     elif numero % 2 == 0:
-        primo = False
-        return primo
+        primo = False     
     else:
         mitad = numero ** 0.5
-        divisor = 2
+        divisor = 3
         while divisor <= mitad:
             resto = numero % divisor
             if resto == 0:
                 primo = False
-            return primo
+                return primo
             divisor += 1
-        return primo
+    return primo
 
 
 def divisores(numero):
