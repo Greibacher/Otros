@@ -1,0 +1,4 @@
+Letras Mayusculas 65-90
+Letras Minusculas 97-122
+Vocales con acento Mayuscula 192-220
+numeros 48-57
