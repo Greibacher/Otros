@@ -1,0 +1,88 @@
+# Funcion que dado un numero entero n determina si es primo
+def esPrimo(n):
+    if n < 2:
+        return False
+    elif n == 2:
+        return True
+    elif n % 2 == 0:
+        return False
+    else:
+        raiz = int(n**0.5)+1
+        for i in range(2, raiz):
+            if n % i == 0:
+                return False
+    return True
+
+# Dado un numero entero positivo n devuelve el primer primo proximo a n
+def nextPrime(n):
+    n+= 1
+    while not esPrimo(n):
+        if esPrimo(n):
+            break
+        n += 1
+    return n
+
+# Por medio de un diccionario se devuelve de un numero entero n los divisores
+def calcularDivisores(n):
+    l = {1:1}
+    if esPrimo(n):
+        l[n] = 1
+        return l 
+    primo = 2
+    while n > 1:
+        if n % primo == 0:
+            if primo in l.keys():
+                l[primo] += 1
+            else:
+                l[primo] = 1 
+            n /= primo
+            n = int(n)
+            continue
+        if esPrimo(n):
+            if n in l.keys():
+                l[n] += 1
+            else:
+                l[n] = 1 
+            return l
+        primo = nextPrime(primo)
+    return l
+
+
+# Dado un diccionario de {nPrimo: indice} n^indice Calcula el numero original
+def calcularTotal(dicc):
+    suma = 1
+    for i in dicc.keys():
+        suma *= i ** dicc[i]
+    return suma
+
+
+# Dado dos enteros x y devuelve el maximo comun divisor
+def MCD(x,y):
+    x = calcularDivisores(x)
+    y = calcularDivisores(y)
+    print(x,"\n",y)
+    dic = {}
+    for i in x.keys():
+        for j in y.keys():
+            print(i, j)
+            if i == j:
+                print("Ingreso el: ", i)
+                if x[i] <= y[j]:
+                    dic[i] = x[i]
+                else:
+                    dic[j] = y[j]
+    print(dic)
+    return calcularTotal(dic)
+
+
+# Funcion que dado una lista de enteros devuelve el mcd entre el maximo y minimo de la lista
+def test(l):
+    may = max(l)
+    men = min(l)
+    print(may, men)
+    m = MCD(may, men)
+    print(m)
+
+
+# Lista
+test([int(input(f"Ingresa el numero {i+1}°")) for i in range(int(input("Ingrese la cantidad de numeros: ")))])
